@@ -33,6 +33,13 @@ const CatModal = ({ cat, onRequestClose }) => {
       className='relative overflow-y-auto rounded-lg'
       overlayClassName='fixed inset-0 bg-black flex justify-center items-center'>
       <div className='relative bg-white rounded-lg max-w-md m-6 sm:m-20'>
+        <button
+          onClick={onRequestClose}
+          className='absolute right-2 text-gray-600 hover:text-gray-800'
+          style={{ fontSize: '2rem' }}
+          aria-label='Close Modal'>
+          &times;
+        </button>
         <img
           src={cat?.url}
           className='w-full h-64 object-cover rounded-t-lg'
