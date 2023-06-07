@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import api from '../services/catApi';
 import BreedCard from '../components/BreedCard';
 
 const Breeds = () => {
