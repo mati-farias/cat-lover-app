@@ -7,8 +7,9 @@ const Breeds = () => {
 
   useEffect(() => {
     const fetchBreeds = async () => {
-      const response = await api.get('/breeds');
-      setBreeds(response.data);
+      const response = await fetch('/api/breeds');
+      const data = await response.json();
+      setBreeds(data);
     };
 
     fetchBreeds();
@@ -22,7 +23,7 @@ const Breeds = () => {
           <BreedCard
             key={breed.id}
             breed={breed}
-            className='bg-white rounded-lg shadow-lg p-6'
+            className='rounded-lg shadow-lg p-6'
           />
         ))}
       </div>

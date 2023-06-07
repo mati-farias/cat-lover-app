@@ -8,20 +8,23 @@ const NavBar = () => {
           <div className='flex space-x-4'>
             <Link
               href='/'
-              className='text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium'>
+              className='text-white hover:bg-gray-700 px-5 py-2 rounded-md text-xl font-medium'>
               Home
             </Link>
             <Link
               href='/breeds'
-              className='text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium'>
+              className='text-white hover:bg-gray-700 px-3 py-2 rounded-md text-xl font-medium'>
               Breeds
             </Link>
             <Link
               href='/favourites'
-              className='text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium'>
+              className='text-white hover:bg-gray-700 px-3 py-2 rounded-md text-xl font-medium'>
               Favourites
             </Link>
           </div>
+          <h1 className='text-4xl font-bold text-blue-400 mb-6 text-center'>
+            CAT-LOVERS-APP
+          </h1>
         </div>
       </div>
     </nav>

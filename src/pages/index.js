@@ -1,36 +1,42 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useRouter } from 'next/router';
-import api from '../services/catApi';
+import { fetchCats, fetchCatById } from '../services/catService';
 import CatCard from '../components/CatCard';
 import CatModal from '../components/CatModal';
-import { fetchCats, fetchCatById } from '../services/catService';
-import Link from 'next/link';
 
 const HomePage = () => {
   const [cats, setCats] = useState([]);
-  const router = useRouter();
   const [selectedCat, setSelectedCat] = useState(null);
+  const [catId, setCatId] = useState(null);
+  const router = useRouter();
+  const CatCardMemo = React.memo(CatCard);
 
   useEffect(() => {
-    if (cats.length === 0) {
-      const fetchInitialCats = async () => {
-        const initialCats = await fetchCats();
-        setCats(initialCats);
+    const fetchInitialCats = async () => {
+      const response = await fetch('/api/cats');
+      const initialCats = await response.json();
+      setCats(initialCats);
+    };
+
+    fetchInitialCats();
+  }, []);
+
+  useEffect(() => {
+    if (catId) {
+      const fetchAndSetSelectedCat = async () => {
+        const response = await fetch(`/api/cats/${catId}`);
+        const cat = await response.json();
+        setSelectedCat(cat);
       };
 
-      fetchInitialCats();
-
-      if (router.query.catId) {
-        const fetchAndSetSelectedCat = async () => {
-          const cat = await fetchCatById(router.query.catId);
-          setSelectedCat(cat);
-        };
-
-        fetchAndSetSelectedCat();
-      } else {
-        setSelectedCat(null);
-      }
+      fetchAndSetSelectedCat();
+    } else {
+      setSelectedCat(null);
     }
+  }, [catId]);
+
+  useEffect(() => {
+    setCatId(router.query.catId);
   }, [router.query.catId]);
 
   const fetchMoreCats = async () => {
@@ -41,12 +47,9 @@ const HomePage = () => {
   return (
     <div className='min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12'>
       <div className='relative py-3 sm:mx-auto'>
-        <h1 className='text-2xl font-bold text-blue-900 mb-6 text-center'>
-          Hello, cat lovers!
-        </h1>
-        <div className='grid grid-cols-5 gap-4 px-5'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 px-5'>
           {cats.map((cat) => (
-            <CatCard
+            <CatCardMemo
               key={cat.id}
               cat={cat}
               className='transform hover:scale-105 transition-transform duration-200 rounded-lg shadow-lg overflow-hidden'
