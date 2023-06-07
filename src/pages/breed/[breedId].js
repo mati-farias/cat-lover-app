@@ -10,7 +10,9 @@ const BreedPage = () => {
   useEffect(() => {
     const getBreedDetails = async () => {
       if (breedId) {
-        const details = await fetchBreedDetails(breedId);
+        const response = await fetch(`/api/cats/${breedId}`);
+        const details = await response.json();
+        console.log(details);
         setBreedDetails(details);
       }
     };
@@ -25,31 +27,27 @@ const BreedPage = () => {
   return (
     <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6'>
       <div className='bg-white rounded-lg shadow p-6'>
-        <h1 className='text-3xl font-bold mb-5'>{breedDetails.name}</h1>
-        <p className='mb-4 text-gray-700'>{breedDetails.description}</p>
-        <div className='flex'>
-          <p className='mr-2 text-gray-900 font-bold'>Weight: </p>
-          <p className='text-gray-500'>{breedDetails.weight.metric} kg</p>
-        </div>
+        <h1 className='text-3xl font-bold mb-5'>{breedDetails[0].name}</h1>
+        <p className='mb-4 text-gray-700'>{breedDetails[0].description}</p>
         <div className='flex'>
           <p className='mr-2 text-gray-900 font-bold'>Origin: </p>
-          <p className='text-gray-500'>{breedDetails.origin}</p>
+          <p className='text-gray-500'>{breedDetails[0].origin}</p>
         </div>
         <div className='flex'>
           <p className='mr-2 text-gray-900 font-bold'>Life Span: </p>
-          <p className='text-gray-500'> {breedDetails.life_span} years</p>
+          <p className='text-gray-500'> {breedDetails[0].life_span} years</p>
         </div>
         <div className='flex'>
           <p className='mr-2 text-gray-900 font-bold'>Affection Level: </p>
-          <p className='text-gray-500'> {breedDetails.affection_level}/5</p>
+          <p className='text-gray-500'> {breedDetails[0].affection_level}/5</p>
         </div>
         <div className='flex'>
           <p className='mr-2 text-gray-900 font-bold'>Child Friendly: </p>
-          <p className='text-gray-500'> {breedDetails.child_friendly}/5</p>
+          <p className='text-gray-500'> {breedDetails[0].child_friendly}/5</p>
         </div>
         <div className='flex'>
           <p className='mr-2 text-gray-900 font-bold'>Temperament: </p>
-          <p className='text-gray-500'>{breedDetails.temperament}</p>
+          <p className='text-gray-500'>{breedDetails[0].temperament}</p>
         </div>
       </div>
     </div>

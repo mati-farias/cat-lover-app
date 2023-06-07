@@ -9,10 +9,9 @@ const BreedCard = ({ breed }) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleOpenModal = async () => {
-    const response = await api.get(
-      `/images/search?breed_ids=${breed.id}&limit=10`
-    );
-    setCats(response.data);
+    const response = await fetch(`/api/images/${breed.id}`);
+    const data = await response.json();
+    setCats(data);
     setShowModal(true);
   };
 
@@ -21,8 +20,21 @@ const BreedCard = ({ breed }) => {
     setShowModal(false);
   };
 
+  const bgColors = [
+    'bg-blue-200',
+    'bg-red-200',
+    'bg-yellow-200',
+    'bg-green-200',
+    'bg-purple-200',
+  ];
+
+  const getRandomBgColor = () => {
+    return bgColors[Math.floor(Math.random() * bgColors.length)];
+  };
+
   return (
-    <div className='flex flex-col bg-white rounded-lg shadow-lg p-6 hover:bg-gray-100 hover:shadow-xl transition-all duration-200'>
+    <div
+      className={`${getRandomBgColor()} flex flex-col rounded-lg shadow-lg p-6 hover:bg-gray-500 hover:shadow-xl transition-all duration-200`}>
       <h2
         onClick={handleOpenModal}
         className='text-xl font-bold mb-2 cursor-pointer'>
