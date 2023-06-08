@@ -1,9 +1,10 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { FavouritesContext } from '../context/FavouritesContext';
+import CatModal from '../components/CatModal';
 
 const FavouritesPage = () => {
   const { favourites, removeFromFavourites } = useContext(FavouritesContext);
-  console.log(favourites, 'page');
+  const [selectedCat, setSelectedCat] = useState(null);
 
   if (!favourites) {
     return <p>Loading...</p>; // You can replace this with a loading spinner or similar
@@ -19,7 +20,8 @@ const FavouritesPage = () => {
           favourites.map((cat) => (
             <div
               key={cat.id}
-              className='bg-white rounded-lg shadow-lg overflow-hidden'>
+              onClick={() => setSelectedCat(cat)}
+              className='bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer'>
               <img
                 src={cat.url}
                 alt={cat.id}
@@ -27,7 +29,10 @@ const FavouritesPage = () => {
               />
               <div className='p-4'>
                 <button
-                  onClick={() => removeFromFavourites(cat)}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    removeFromFavourites(cat);
+                  }}
                   className='col-span-full bg-red-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-5'>
                   Remove from favourites
                 </button>
@@ -38,6 +43,10 @@ const FavouritesPage = () => {
           <p>No favourite cats yet!</p>
         )}
       </div>
+      <CatModal
+        cat={selectedCat}
+        onRequestClose={() => setSelectedCat(null)}
+      />
     </div>
   );
 };
