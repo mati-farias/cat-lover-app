@@ -8,9 +8,9 @@ const NavBar = () => {
         <div className='flex flex-col sm:flex-row justify-between items-center'>
           <div className='pr-5 sm:pr-0 hidden sm:block'>
             <Image
-              src='/pngwing.png'
+              src='/paws.png'
               alt='Logo'
-              width={100} // Adjust according to your need
+              width={80} // Adjust according to your need
               height={50} // Adjust according to your need
             />
           </div>
