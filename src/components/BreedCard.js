@@ -21,11 +21,13 @@ const BreedCard = ({ breed }) => {
   };
 
   const bgColors = [
-    'bg-blue-200',
-    'bg-red-200',
-    'bg-yellow-200',
-    'bg-green-200',
-    'bg-purple-200',
+    'bg-sky-200',
+    'bg-blue-400',
+    'bg-green-500',
+    'bg-teal-500',
+    'bg-emerald-300',
+    'bg-emerald-500',
+    'bg-cyan-500',
   ];
 
   const getRandomBgColor = () => {

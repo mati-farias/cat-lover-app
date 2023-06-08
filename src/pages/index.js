@@ -21,22 +21,18 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
-    if (catId) {
-      const fetchAndSetSelectedCat = async () => {
-        const response = await fetch(`/api/cats/${catId}`);
-        const cat = await response.json();
-        setSelectedCat(cat);
-      };
+    const fetchAndSetSelectedCat = async () => {
+      if (!catId) {
+        setSelectedCat(null);
+        return;
+      }
+      const response = await fetch(`/api/cats/${catId}`);
+      const cat = await response.json();
+      setSelectedCat(cat);
+    };
 
-      fetchAndSetSelectedCat();
-    } else {
-      setSelectedCat(null);
-    }
+    fetchAndSetSelectedCat();
   }, [catId]);
-
-  useEffect(() => {
-    setCatId(router.query.catId);
-  }, [router.query.catId]);
 
   const fetchMoreCats = async () => {
     const moreCats = await fetchCats();
