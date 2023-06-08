@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { fetchCats, fetchCatById } from '../services/catService';
 import CatCard from '../components/CatCard';
 import CatModal from '../components/CatModal';
-import { Spinner } from '../components/Spinner';
+import SkeletonCatCard from '../components/SkeletonCatCard';
 
 const HomePage = () => {
   const [cats, setCats] = useState([]);
@@ -49,8 +49,10 @@ const HomePage = () => {
     <div className='min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12 font-chelsea'>
       <div className='relative py-3 sm:mx-auto'>
         {initialLoading ? (
-          <div className='flex justify-center items-center min-h-screen'>
-            <Spinner />
+          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 gap-y-12 px-5'>
+            {Array.from({ length: 10 }).map((_, index) => (
+              <SkeletonCatCard key={index} />
+            ))}
           </div>
         ) : (
           <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 gap-y-12 px-5'>

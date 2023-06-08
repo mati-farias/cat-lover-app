@@ -35,7 +35,9 @@ const CatModal = ({ cat, onRequestClose }) => {
 
   const handleShare = async () => {
     try {
-      await navigator.clipboard.writeText(window.location.href);
+      await navigator.clipboard.writeText(
+        `${window.location.origin}/cat/${cat.id}`
+      );
       setCopyButtonText('Copied!');
       setTimeout(() => setCopyButtonText('Copy URL'), 2000);
     } catch (err) {
