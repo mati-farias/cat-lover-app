@@ -1,22 +1,21 @@
-// pages/404.js
-
+import React from 'react';
 import Link from 'next/link';
 
-export default function Custom404() {
-  return (
-    <div className='flex flex-col items-center justify-start min-h-screen text-center font-chelsea pt-24'>
-      <h1 className='font-bold text-3xl md:text-5xl max-w-xl mt-12 text-blue-400'>
-        Oh no! The page you're looking for does not exist.
-      </h1>
-      <p className='mt-2 mb-6'>
-        It looks like the page you're looking for doesn't exist or has been
-        moved.
-      </p>
-      <Link href='/'>
-        <span className='cursor-pointer text-blue-500 hover:underline'>
-          Go back home
-        </span>
-      </Link>
-    </div>
-  );
-}
+const NotFound = () => (
+  <div className='flex flex-col items-center'>
+    <h1 className='mt-10 mb-4 text-5xl text-gray-800'>
+      404 - That&apos;s an error!
+    </h1>
+    <h2 className='mb-5 text-xl text-gray-600'>
+      The page you are looking for does not exist. How you got here is a
+      mystery. But you can click the button below to go back to the homepage.
+    </h2>
+    <Link href='/'>
+      <button className='px-4 py-2 rounded bg-gray-500 text-gray-200'>
+        Home
+      </button>
+    </Link>
+  </div>
+);
+
+export default NotFound;
