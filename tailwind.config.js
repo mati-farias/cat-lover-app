@@ -15,6 +15,16 @@ module.exports = {
       fontFamily: {
         chelsea: ['Chelsea Market', 'sans-serif'],
       },
+      height: {
+        'spinner-sm': '1rem',
+        'spinner-md': '2rem',
+        'spinner-lg': '3rem',
+      },
+      width: {
+        'spinner-sm': '1rem',
+        'spinner-md': '2rem',
+        'spinner-lg': '3rem',
+      },
     },
   },
   plugins: [],

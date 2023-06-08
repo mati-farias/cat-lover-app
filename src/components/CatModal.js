@@ -30,8 +30,8 @@ const CatModal = ({ cat, onRequestClose }) => {
     <Modal
       isOpen={!!cat}
       onRequestClose={onRequestClose}
-      className='relative overflow-y-auto rounded-lg'
-      overlayClassName='fixed inset-0 bg-black flex justify-center items-center'>
+      className='relative overflow-y-auto rounded-lg border-0'
+      overlayClassName='fixed border-0 inset-0 bg-black flex justify-center items-center'>
       <div className='relative bg-white rounded-lg max-w-md m-6 sm:m-20 font-chelsea'>
         <button
           onClick={onRequestClose}
