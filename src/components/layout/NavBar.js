@@ -4,7 +4,7 @@ import Image from 'next/image';
 const NavBar = () => {
   return (
     <nav className='bg-gray-800 py-4'>
-      <div className='max-w-8xl mx-auto px-4 sm:px-6 lg:px-8'>
+      <div className='max-w-8xl mx-auto px-4 sm:px-6'>
         <div className='flex flex-col sm:flex-row justify-between items-center'>
           <div className='pr-5 sm:pr-0 hidden sm:block'>
             <Image
@@ -14,7 +14,7 @@ const NavBar = () => {
               height={50} // Adjust according to your need
             />
           </div>
-          <div className='flex flex-row space-x-4 my-2 sm:my-0 font-chelsea'>
+          <div className='flex flex-row space-x-4 my-2 lg:pl-20 sm:my-0 font-chelsea'>
             <Link
               href='/'
               className='text-white hover:bg-gray-700 px-5 py-2 rounded-md text-lg sm:text-xl font-medium'>
