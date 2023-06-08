@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { fetchCats, fetchCatById } from '../services/catService';
 import CatCard from '../components/CatCard';

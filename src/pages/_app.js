@@ -9,36 +9,34 @@ import Head from 'next/head';
 export default function App({ Component, pageProps }) {
   return (
     <FavouritesProvider>
-      <CatsProvider>
-        <Head>
-          <link
-            href='https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap'
-            rel='stylesheet'
-          />
-          <style
-            jsx
-            global>{`
-            h1,
-            h2,
-            h3,
-            h4,
-            h5,
-            h6 {
-              font-family: 'Chelsea Market', cursive;
-            }
-            p,
-            span,
-            a,
-            button {
-              font-family: 'Montserrat', sans-serif;
-              font-family: 'Short Stack', cursive;
-            }
-          `}</style>
-        </Head>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </CatsProvider>
+      <Head>
+        <link
+          href='https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap'
+          rel='stylesheet'
+        />
+        <style
+          jsx
+          global>{`
+          h1,
+          h2,
+          h3,
+          h4,
+          h5,
+          h6 {
+            font-family: 'Chelsea Market', cursive;
+          }
+          p,
+          span,
+          a,
+          button {
+            font-family: 'Montserrat', sans-serif;
+            font-family: 'Short Stack', cursive;
+          }
+        `}</style>
+      </Head>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </FavouritesProvider>
   );
 }

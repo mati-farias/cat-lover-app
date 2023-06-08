@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 const CatModal = ({ cat, onRequestClose }) => {
   const { favourites, addToFavourites } = useContext(FavouritesContext);
   const [breedDetails, setBreedDetails] = useState(null);
+  const [copyButtonText, setCopyButtonText] = useState('Copy URL');
   const router = useRouter();
 
   useEffect(() => {
@@ -24,6 +25,16 @@ const CatModal = ({ cat, onRequestClose }) => {
   const handleFavourite = () => {
     addToFavourites(cat);
     onRequestClose();
+  };
+
+  const handleShare = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setCopyButtonText('Copied!');
+      setTimeout(() => setCopyButtonText('Copy URL'), 2000);
+    } catch (err) {
+      console.error('Failed to copy url: ', err);
+    }
   };
 
   return (
@@ -66,6 +77,11 @@ const CatModal = ({ cat, onRequestClose }) => {
             onClick={handleFavourite}
             className='mt-4 inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none'>
             Add to Favourites
+          </button>
+          <button
+            onClick={handleShare}
+            className='mt-4 inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-blue-500 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none'>
+            {copyButtonText}
           </button>
         </div>
       </div>
