@@ -1,14 +1,15 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { FavouritesContext } from '../context/FavouritesContext';
 import { fetchBreedDetails } from '../services/catService';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 
 const CatModal = ({ cat, onRequestClose }) => {
-  const { favourites, addToFavourites } = useContext(FavouritesContext);
+  const { favourites, addToFavourites, removeFromFavourites } =
+    useContext(FavouritesContext);
   const [breedDetails, setBreedDetails] = useState(null);
   const [copyButtonText, setCopyButtonText] = useState('Copy URL');
+
   const router = useRouter();
 
   useEffect(() => {
@@ -27,6 +28,11 @@ const CatModal = ({ cat, onRequestClose }) => {
     onRequestClose();
   };
 
+  const handleUnfavourite = () => {
+    removeFromFavourites(cat);
+    onRequestClose();
+  };
+
   const handleShare = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
@@ -36,6 +42,9 @@ const CatModal = ({ cat, onRequestClose }) => {
       console.error('Failed to copy url: ', err);
     }
   };
+
+  const isFavourite = (cat) =>
+    cat && favourites.some((favouriteCat) => favouriteCat.id === cat.id);
 
   return (
     <Modal
@@ -52,7 +61,7 @@ const CatModal = ({ cat, onRequestClose }) => {
           &times;
         </button>
         <img
-          src={cat?.url}
+          src={cat?.url ?? ''}
           className='w-full h-64 object-cover rounded-t-lg'
         />
         <div className='px-6 py-4'>
@@ -73,11 +82,19 @@ const CatModal = ({ cat, onRequestClose }) => {
               Breed information is not available for this cat!
             </p>
           )}
-          <button
-            onClick={handleFavourite}
-            className='mt-4 inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none'>
-            Add to Favourites
-          </button>
+          {isFavourite(cat) ? (
+            <button
+              onClick={handleUnfavourite}
+              className='mt-4 inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-red-600 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none'>
+              Remove from Favourites
+            </button>
+          ) : (
+            <button
+              onClick={handleFavourite}
+              className='mt-4 inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none'>
+              Add to Favourites
+            </button>
+          )}
           <button
             onClick={handleShare}
             className='mt-4 inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-blue-500 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none'>
