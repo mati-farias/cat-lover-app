@@ -12,7 +12,6 @@ const BreedPage = () => {
       if (breedId) {
         const response = await fetch(`/api/cats/${breedId}`);
         const details = await response.json();
-        console.log(details);
         setBreedDetails(details);
       }
     };

@@ -20,8 +20,9 @@ const HomePage = () => {
       setCats(initialCats);
       setInitialLoading(false);
     };
-
-    fetchInitialCats();
+    if (cats.length === 0) {
+      fetchInitialCats();
+    }
   }, []);
 
   useEffect(() => {

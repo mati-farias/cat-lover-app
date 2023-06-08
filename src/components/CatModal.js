@@ -25,12 +25,10 @@ const CatModal = ({ cat, onRequestClose }) => {
 
   const handleFavourite = () => {
     addToFavourites(cat);
-    onRequestClose();
   };
 
   const handleUnfavourite = () => {
     removeFromFavourites(cat);
-    onRequestClose();
   };
 
   const handleShare = async () => {
