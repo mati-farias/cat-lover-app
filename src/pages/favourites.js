@@ -27,13 +27,13 @@ const FavouritesPage = () => {
                 alt={cat.id}
                 className='w-full h-56 object-cover'
               />
-              <div className='p-4'>
+              <div className='p-4 flex justify-center'>
                 <button
                   onClick={(event) => {
                     event.stopPropagation();
                     removeFromFavourites(cat);
                   }}
-                  className='col-span-full bg-red-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-5'>
+                  className='col-span-full bg-red-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded'>
                   Remove from favourites
                 </button>
               </div>

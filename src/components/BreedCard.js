@@ -53,11 +53,11 @@ const BreedCard = ({ breed }) => {
               <Link
                 href={`/cat/${cat.id}`}
                 key={cat.id}>
-                <div className='flex justify-center'>
+                <div className='flex justify-center h-96 w-full'>
                   <img
                     src={cat.url}
                     alt={breed.name}
-                    className='rounded-lg max-h-96 max-w-lg'
+                    className='object-cover h-full w-full rounded-lg'
                   />
                 </div>
               </Link>
