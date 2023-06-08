@@ -25,7 +25,7 @@ const BreedPage = () => {
   }
 
   return (
-    <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6'>
+    <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 font-chelsea'>
       <div className='bg-white rounded-lg shadow p-6'>
         <h1 className='text-3xl font-bold mb-5'>{breedDetails[0].name}</h1>
         <p className='mb-4 text-gray-700'>{breedDetails[0].description}</p>

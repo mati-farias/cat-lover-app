@@ -19,9 +19,6 @@ const CatCard = ({ cat }) => {
           alt='Cat'
         />
       </div>
-      {/* <div className='px-6 py-4'>
-        <div className='font-bold text-xl mb-2'>Cat ID: {cat.id}</div>
-      </div> */}
     </div>
   );
 };

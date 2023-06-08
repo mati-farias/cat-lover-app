@@ -9,7 +9,6 @@ const HomePage = () => {
   const [selectedCat, setSelectedCat] = useState(null);
   const [catId, setCatId] = useState(null);
   const router = useRouter();
-  const CatCardMemo = React.memo(CatCard);
 
   useEffect(() => {
     const fetchInitialCats = async () => {
@@ -45,11 +44,11 @@ const HomePage = () => {
   };
 
   return (
-    <div className='min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12'>
+    <div className='min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12 font-chelsea'>
       <div className='relative py-3 sm:mx-auto'>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 gap-y-12 px-5'>
           {cats.map((cat) => (
-            <CatCardMemo
+            <CatCard
               key={cat.id}
               cat={cat}
               className='transform hover:scale-105 transition-transform duration-200 rounded-lg shadow-lg overflow-hidden'

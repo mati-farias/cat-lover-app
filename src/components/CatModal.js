@@ -32,7 +32,7 @@ const CatModal = ({ cat, onRequestClose }) => {
       onRequestClose={onRequestClose}
       className='relative overflow-y-auto rounded-lg'
       overlayClassName='fixed inset-0 bg-black flex justify-center items-center'>
-      <div className='relative bg-white rounded-lg max-w-md m-6 sm:m-20'>
+      <div className='relative bg-white rounded-lg max-w-md m-6 sm:m-20 font-chelsea'>
         <button
           onClick={onRequestClose}
           className='absolute right-2 text-gray-600 hover:text-gray-800'
