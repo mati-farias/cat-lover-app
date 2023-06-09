@@ -13,15 +13,32 @@ const HomePage = () => {
   const [initialLoading, setInitialLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
 
+  const fetchInitialCats = async () => {
+    const response = await fetch('/api/cats');
+    const initialCats = await response.json();
+    localStorage.setItem('cats', JSON.stringify(initialCats));
+    setCats(initialCats);
+    setInitialLoading(false);
+  };
+
   useEffect(() => {
-    const fetchInitialCats = async () => {
-      const response = await fetch('/api/cats');
-      const initialCats = await response.json();
-      setCats(initialCats);
-      setInitialLoading(false);
-    };
-    if (cats.length === 0) {
+    // const fetchInitialCats = async () => {
+    //   const response = await fetch('/api/cats');
+    //   const initialCats = await response.json();
+    //   localStorage.setItem('cats', JSON.stringify(initialCats));
+    //   setCats(initialCats);
+    //   setInitialLoading(false);
+    // };
+
+    if (
+      !JSON.parse(localStorage.getItem('cats')) ||
+      JSON.parse(localStorage.getItem('cats')).length === 0
+    ) {
       fetchInitialCats();
+    } else {
+      const cats = JSON.parse(localStorage.getItem('cats'));
+      setCats(cats);
+      setInitialLoading(false);
     }
   }, []);
 
@@ -46,6 +63,11 @@ const HomePage = () => {
     setLoadingMore(false);
   };
 
+  const handleRefreshCats = () => {
+    localStorage.removeItem('cats');
+    fetchInitialCats();
+  };
+
   return (
     <div className='min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12 font-chelsea'>
       <div className='relative py-3 sm:mx-auto'>
@@ -57,7 +79,7 @@ const HomePage = () => {
           </div>
         ) : (
           <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 gap-y-12 px-5'>
-            {cats.map((cat) => (
+            {cats?.map((cat) => (
               <CatCard
                 key={cat.id}
                 cat={cat}
@@ -66,13 +88,21 @@ const HomePage = () => {
             ))}
             <button
               onClick={fetchMoreCats}
-              className='col-span-full xl:col-span-1 xl:col-start-3 bg-blue-400 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded flex justify-center items-center'>
+              className='col-span-full xl:col-span-1 xl:col-start-2 bg-blue-400 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded flex justify-center items-center'>
               {loadingMore ? 'Loading...' : 'Load More'}
+            </button>
+
+            <button
+              onClick={handleRefreshCats}
+              className='col-span-full xl:col-span-1 xl:col-start-4 bg-green-400 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded flex justify-center items-center'>
+              Get Other Cats!
             </button>
 
             <CatModal
               cat={selectedCat}
-              onRequestClose={() => router.push({ pathname: '/', query: {} })}
+              onRequestClose={() =>
+                router.push('/', undefined, { shallow: true })
+              }
             />
           </div>
         )}

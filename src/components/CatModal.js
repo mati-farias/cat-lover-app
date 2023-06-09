@@ -4,7 +4,7 @@ import { FavouritesContext } from '../context/FavouritesContext';
 import { fetchBreedDetails } from '../services/catService';
 import { useRouter } from 'next/router';
 
-const CatModal = ({ cat, onRequestClose }) => {
+const CatModal = ({ cat, isOpen, onRequestClose }) => {
   const { favourites, addToFavourites, removeFromFavourites } =
     useContext(FavouritesContext);
   const [breedDetails, setBreedDetails] = useState(null);
