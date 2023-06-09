@@ -15,7 +15,8 @@ version of the image, along with any available breed information. If breed
 information is available, it contains a link to the breed detail view. The modal
 also contains a feature to mark the image as a favorite. The URL of each
 individual cat image can be copied and shared with friends, leading them
-directly to the same view.
+directly to the same view. Also, if the list is getting too long, you can press
+the get other cats! button so it'll get you 10 new random cats.
 
 ### :books: Cat Breed List
 
@@ -40,8 +41,6 @@ customization of this list over time.
   favorites. This makes the state of the user's favorite images easily
   accessible throughout the application, allowing for consistent updates across
   different views.
-- **Next.js Image Optimization:** The application leverages Next.js for image
-  optimization, improving performance and user experience.
 - **Responsive Design:** The application is fully responsive, allowing for an
   enjoyable user experience on devices of various screen sizes.
 
