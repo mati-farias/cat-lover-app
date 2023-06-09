@@ -22,7 +22,7 @@ const Breeds = () => {
     <div className='px-6 py-4 font-chelsea'>
       <h1 className='font-bold text-3xl mb-4'>Cat Breeds</h1>
       <div className='grid md:grid-cols-2 gap-4'>
-        {loading // change this
+        {loading
           ? Array.from({ length: breeds.length || 20 }).map((_, index) => (
               <SkeletonBreedCard key={index} />
             ))

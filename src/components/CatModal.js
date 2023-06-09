@@ -4,11 +4,13 @@ import { FavouritesContext } from '../context/FavouritesContext';
 import { fetchBreedDetails } from '../services/catService';
 import { useRouter } from 'next/router';
 
-const CatModal = ({ cat, isOpen, onRequestClose }) => {
+const CatModal = ({ cat, onRequestClose }) => {
   const { favourites, addToFavourites, removeFromFavourites } =
     useContext(FavouritesContext);
   const [breedDetails, setBreedDetails] = useState(null);
-  const [copyButtonText, setCopyButtonText] = useState('Copy URL');
+  const [copyButtonText, setCopyButtonText] = useState(
+    'Share with friends! Copy this cat URL'
+  );
 
   const router = useRouter();
 

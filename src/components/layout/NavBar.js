@@ -10,8 +10,8 @@ const NavBar = () => {
             <Image
               src='/paws.png'
               alt='Logo'
-              width={80} // Adjust according to your need
-              height={50} // Adjust according to your need
+              width={80}
+              height={50}
             />
           </div>
           <div className='flex flex-row space-x-4 my-2 lg:pl-20 sm:my-0 font-chelsea'>
