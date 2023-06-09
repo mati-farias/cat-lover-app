@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import api from '../../services/catApi';
 import CatModal from '../../components/CatModal';
 import { useEffect, useState } from 'react';
 
@@ -10,8 +9,9 @@ const CatPage = () => {
 
   useEffect(() => {
     const fetchCat = async () => {
-      const response = await api.get(`/images/${id}`);
-      setCat(response.data);
+      const response = await fetch(`/api/${id}`);
+      const data = await response.json();
+      setCat(data);
     };
 
     if (id) {

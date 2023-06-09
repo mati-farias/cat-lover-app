@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { fetchBreedDetails } from '../../services/catService';
 
 const BreedPage = () => {
   const [breedDetails, setBreedDetails] = useState(null);
