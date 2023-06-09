@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { fetchCats, fetchCatById } from '../services/catService';
 import CatCard from '../components/CatCard';
 import CatModal from '../components/CatModal';
 import SkeletonCatCard from '../components/SkeletonCatCard';
@@ -12,6 +11,7 @@ const HomePage = () => {
   const router = useRouter();
   const [initialLoading, setInitialLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [refreshingCats, setRefreshingCats] = useState(false);
 
   const fetchInitialCats = async () => {
     const response = await fetch('/api/cats');
@@ -22,14 +22,6 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    // const fetchInitialCats = async () => {
-    //   const response = await fetch('/api/cats');
-    //   const initialCats = await response.json();
-    //   localStorage.setItem('cats', JSON.stringify(initialCats));
-    //   setCats(initialCats);
-    //   setInitialLoading(false);
-    // };
-
     if (
       !JSON.parse(localStorage.getItem('cats')) ||
       JSON.parse(localStorage.getItem('cats')).length === 0
@@ -58,14 +50,17 @@ const HomePage = () => {
 
   const fetchMoreCats = async () => {
     setLoadingMore(true);
-    const moreCats = await fetchCats();
+    const response = await fetch('/api/cats');
+    const moreCats = await response.json();
     setCats((oldCats) => [...oldCats, ...moreCats]);
     setLoadingMore(false);
   };
 
   const handleRefreshCats = () => {
+    setRefreshingCats(true);
     localStorage.removeItem('cats');
     fetchInitialCats();
+    setRefreshingCats(false);
   };
 
   return (
@@ -88,12 +83,14 @@ const HomePage = () => {
             ))}
             <button
               onClick={fetchMoreCats}
+              disabled={loadingMore}
               className='col-span-full xl:col-span-1 xl:col-start-2 bg-blue-400 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded flex justify-center items-center'>
               {loadingMore ? 'Loading...' : 'Load More'}
             </button>
 
             <button
               onClick={handleRefreshCats}
+              disabled={refreshingCats}
               className='col-span-full xl:col-span-1 xl:col-start-4 bg-green-400 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded flex justify-center items-center'>
               Get Other Cats!
             </button>

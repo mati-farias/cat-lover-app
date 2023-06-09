@@ -55,7 +55,7 @@ const CatModal = ({ cat, isOpen, onRequestClose }) => {
       <div className='relative bg-white rounded-lg max-w-md m-6 sm:m-20 font-chelsea'>
         <button
           onClick={onRequestClose}
-          className='absolute right-2 text-gray-600 hover:text-gray-800'
+          className='absolute right-2 text-white hover:text-gray-800'
           style={{ fontSize: '2rem' }}
           aria-label='Close Modal'>
           &times;
