@@ -49,3 +49,4 @@ customization of this list over time.
 This app was built with Create-Next-App. To run the app, use `npm run dev` or
 `yarn dev` and open [http://localhost:3000](http://localhost:3000) with your
 browser to see the result.
+Or you can check the [deployed version!](https://cat-lover-app.vercel.app/)
