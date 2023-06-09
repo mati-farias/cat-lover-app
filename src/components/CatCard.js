@@ -1,10 +1,6 @@
-import { useRouter } from 'next/router';
-
-const CatCard = ({ cat }) => {
-  const router = useRouter();
-
+const CatCard = ({ cat, setSelectedCat }) => {
   const handleOpenModal = () => {
-    router.push({ pathname: `/cat/${cat.id}` });
+    setSelectedCat(cat);
   };
 
   return (

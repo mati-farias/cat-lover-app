@@ -1,21 +1,24 @@
 import { useContext, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { FavouritesContext } from '../context/FavouritesContext';
-import { fetchBreedDetails } from '../services/catService';
 import { useRouter } from 'next/router';
 
-const CatModal = ({ cat, isOpen, onRequestClose }) => {
+const CatModal = ({ cat, onRequestClose }) => {
   const { favourites, addToFavourites, removeFromFavourites } =
     useContext(FavouritesContext);
   const [breedDetails, setBreedDetails] = useState(null);
-  const [copyButtonText, setCopyButtonText] = useState('Copy URL');
+  const [copyButtonText, setCopyButtonText] = useState(
+    'Share with friends! Copy this cat URL'
+  );
 
   const router = useRouter();
 
   useEffect(() => {
+    console.log(cat);
     const getBreedDetails = async () => {
       if (cat?.breeds?.[0]?.id) {
-        const details = await fetchBreedDetails(cat.breeds[0].id);
+        const response = await fetch(`/api/breeds/${cat.breeds[0].id}`);
+        const details = await response.json();
         setBreedDetails(details);
       }
     };
@@ -67,12 +70,14 @@ const CatModal = ({ cat, isOpen, onRequestClose }) => {
         <div className='px-6 py-4'>
           {breedDetails ? (
             <div>
-              <h2 className='font-bold text-2xl mb-2'>{breedDetails.name}</h2>
+              <h2 className='font-bold text-2xl mb-2'>
+                {breedDetails[0].name}
+              </h2>
               <p className='text-gray-700 text-base'>
                 {breedDetails.description}
               </p>
               <button
-                onClick={() => router.push(`/breed/${breedDetails.id}`)}
+                onClick={() => router.push(`/breed/${breedDetails[0].id}`)}
                 className='mt-4 inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-blue-600 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none'>
                 More about this breed
               </button>
